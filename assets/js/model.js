@@ -14,7 +14,7 @@ var Model = function() {
 
     this.openXhr = function(method) {
         _xhr.open(method, this.getUrl());
-        _xhr.onload = this.onLoadXhr;
+        _xhr.onload = this.onLoadXhr.bind(this);;
         _xhr.send();
     }
 
