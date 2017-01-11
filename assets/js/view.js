@@ -6,28 +6,39 @@ model.openXhr("GET");
 getResponse();
 
 function getResponse() {
-    for(var i = 1; i <= 5; ++i) {
-        setTimeout(function() {
-            response = model.getResponse();
-            if(response) {
-                renderResponse(response);
-                return false;
-            }
-        }, i * 2000);
-    }
-    if(!response) {
-        var myDiv = document.getElementsByClassName('alert-warning');
-        myDiv.innerHTML = "Hmmm...não conseguimos encontrar resultados para sua requisição :(";
-    }
+    setTimeout(function() {
+        response = model.getResponse();
+        if(response) {
+            renderResponse(response);
+        }
+        else {
+            var myDiv = document.getElementById('requestFailed');
+            myDiv.classList.remove("hidden");
+        }
+    }, 2000);
 }
 
 function renderResponse(response) {
-    var table = document.querySelectorAll('table > tbody');
+    //var table = document.querySelectorAll('table > tbody');
+    var tbody  = document.getElementById('myTable').getElementsByTagName('tbody')[0];
+    
     Object.keys(response).map(function(objectKey, index) {
         var value = response[objectKey];
-        console.log(value);
+        var name  = value.name;
+        var email = value.email;
+        var site  = value.website;
         
-        var row = document.createElement('tr');
-        var col = document.createElement('td');
+        var row = tbody.insertRow(0);
+        var cellName = row.insertCell(0);
+        var textName = document.createTextNode(name);
+        cellName.appendChild(textName);
+        
+        var cellEmail = row.insertCell(0);
+        var textEmail = document.createTextNode(email);
+        cellEmail.appendChild(textEmail);
+        
+        var cellSite = row.insertCell(0);
+        var textSite = document.createTextNode(site);
+        cellSite.appendChild(textSite);
     });
 }
