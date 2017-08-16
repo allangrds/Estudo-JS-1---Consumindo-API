@@ -1,1 +1,1 @@
-# Estudo-JS-1---Consumindo-API
+# Estudo de Javascript: Consumindo API
